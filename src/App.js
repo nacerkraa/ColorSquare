@@ -10,7 +10,6 @@ function App() {
   const [task, setTask] = useState("");
   const [SubmitTask, setSubmitTask] = useState([]);
   const [line, setLine] = useState({});
-  const [isDone, setIsDone] = useState(false);
 
 
   
@@ -27,15 +26,6 @@ function App() {
     setTask("");
   }
 
-  function handleStyle() {
-    if (isDone == false) {
-      setLine({textDecoration: "line-through"});
-      setIsDone(true);
-    } else {
-      setLine({});
-      setIsDone(false);
-    }
-  }
 
 
   return (
@@ -45,7 +35,7 @@ function App() {
         <button onClick={addTask}>Submit</button> <br/><br/>
         
         <ul>
-          {SubmitTask.map(todoItem => <li onClick={handleStyle} style={line}><TodoItem text={todoItem}/></li>)}
+          {SubmitTask.map(todoItem => <li><TodoItem text={todoItem}/></li>)}
         </ul>
     </div>
   );
