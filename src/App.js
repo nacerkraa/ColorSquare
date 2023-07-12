@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import './App.css';
 import Navbar from './Navbar';
+import TodoItem from './component/TodoItem';
+
 
 
 
@@ -30,7 +32,7 @@ function App() {
         <button onClick={addTask}>Submit</button> <br/><br/>
         
         <ul>
-          {SubmitTask.map(todoItem => <li>{todoItem}</li>)}
+          {SubmitTask.map(todoItem => <li><TodoItem text={todoItem}/></li>)}
         </ul>
     </div>
   );
