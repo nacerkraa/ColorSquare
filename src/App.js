@@ -2,28 +2,36 @@ import { useState } from 'react';
 import './App.css';
 import Navbar from './Navbar';
 import TodoItem from './component/TodoItem';
+import InputArea from './component/InputArea';
 
 
 
 
 function App() {
-  const [task, setTask] = useState("");
-  const [SubmitTask, setSubmitTask] = useState([]);
-  const [line, setLine] = useState({});
+  const [input, setInput] = useState("");
+  const [item, setItem] = useState([]);
 
 
   
 
-  function taskHandler(event) {
-    setTask(event.target.value);
+  function InputHandler(event) {
+    setInput(event.target.value);
   }
 
-  function addTask(event) {
-    setSubmitTask(prevItems=> {
-      return [...prevItems, task];
+  function addInput(event) {
+    setItem(prevItems=> {
+      return [...prevItems, input];
     });
 
-    setTask("");
+    setInput("");
+  }
+
+  function deleteItem(id) {
+    setItem((prevItems)=>{
+      return prevItems.filter((item, index)=> {
+        return index !== id;
+      })
+    });
   }
 
 
@@ -31,11 +39,12 @@ function App() {
   return (
     <div className="App">
       <Navbar/>
-        <input onChange={taskHandler} name='fname'/> 
-        <button onClick={addTask}>Submit</button> <br/><br/>
+        <InputArea onChange={InputHandler} onClicked={addInput}/>
         
         <ul>
-          {SubmitTask.map(todoItem => <li><TodoItem text={todoItem}/></li>)}
+          {item.map((todoItem, index) =>
+            <TodoItem key={index} id={index} text={todoItem} onChecked={deleteItem}/>
+          )}
         </ul>
     </div>
   );
